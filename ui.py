@@ -22,15 +22,21 @@ class QuizInterFace:
         self.canvas.grid(row=1, column=0, columnspan=2, pady=50)
 
         self.yes_image = PhotoImage(file="images/true.png")
-        self.button_yes = Button(image=self.yes_image, highlightthickness=0, bg=THEME_COLOR)
+        self.button_yes = Button(image=self.yes_image, highlightthickness=0, bg=THEME_COLOR, command=self.yes_b)
         self.button_yes.grid(row=2, column=0)
 
         self.no_image = PhotoImage(file="images/false.png")
-        self.button_yes = Button(image=self.no_image, highlightthickness=0, bg=THEME_COLOR)
-        self.button_yes.grid(row=2, column=1)
+        self.button_no = Button(image=self.no_image, highlightthickness=0, bg=THEME_COLOR, command=self.no_b)
+        self.button_no.grid(row=2, column=1)
         self.get_next_question()
         self.window.mainloop()
 
     def get_next_question(self):
         q_text = self.quiz.next_question()
         self.canvas.itemconfig(self.canvas_text, text=q_text)
+
+    def yes_b(self):
+        self.quiz.check_answer("True")
+
+    def no_b(self):
+        self.quiz.check_answer("False")
